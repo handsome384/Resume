@@ -427,6 +427,37 @@ h3 {
   font-size: 1rem;
 }
 
+.cloud-pet {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding: 22px 0 68px;
+}
+
+.cloud-pet-copy {
+  min-width: 0;
+}
+
+.cloud-pet-card {
+  position: relative;
+  width: min(100%, 620px);
+  justify-self: center;
+  margin: 0;
+  overflow: hidden;
+  border: 3px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 10% 12%, rgba(255, 209, 102, 0.56) 0 34px, transparent 35px),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.cloud-pet-card img {
+  width: 100%;
+  height: auto;
+}
+
 .section-heading {
   display: grid;
   gap: 12px;
@@ -622,29 +653,9 @@ h3 {
   animation: shutter-flash 340ms ease-out;
 }
 
-.reel-caption {
-  position: absolute;
-  left: 18px;
-  bottom: 18px;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: calc(100% - 36px);
-  padding: 10px 12px;
-  border: 2px solid var(--line);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--surface) 90%, transparent);
-  font-weight: 900;
-}
-
-.reel-caption span {
-  color: var(--coral);
-}
-
 .camera-controls {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 14px;
   align-items: center;
   padding: 14px;
@@ -678,19 +689,6 @@ h3 {
 }
 
 .shutter-hint,
-.film-counter {
-  margin: 0;
-  color: #fffdf8;
-  font-weight: 900;
-}
-
-.film-counter {
-  justify-self: end;
-  padding: 8px 10px;
-  border: 2px solid #fffdf8;
-  border-radius: var(--radius);
-}
-
 .reel-dots {
   display: flex;
   flex-wrap: wrap;
@@ -1103,6 +1101,7 @@ h3 {
   }
 
   .hero,
+  .cloud-pet,
   .memory-grid,
   .explore-layout,
   .people-grid,
@@ -1113,6 +1112,10 @@ h3 {
 
   .hero {
     min-height: auto;
+  }
+
+  .cloud-pet {
+    padding-top: 0;
   }
 
   .hero-portrait {
@@ -1233,10 +1236,15 @@ h3 {
   }
 
   .memory-section,
+  .cloud-pet,
   .explore-section,
   .people-section,
   .resume-section {
     padding: 42px 0;
+  }
+
+  .cloud-pet-card {
+    width: 100%;
   }
 
   .music-card,

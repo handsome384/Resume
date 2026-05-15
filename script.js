@@ -11,10 +11,7 @@ const lightboxTitle = lightbox?.querySelector("strong");
 const lightboxClose = lightbox?.querySelector(".lightbox-close");
 const memoryPlay = document.querySelector("#memoryPlay");
 const reelImage = document.querySelector("#reelImage");
-const reelTitle = document.querySelector("#reelTitle");
-const reelIndex = document.querySelector("#reelIndex");
 const reelDots = document.querySelector("#reelDots");
-const reelTotal = document.querySelector("#reelTotal");
 const cameraShutter = document.querySelector("#cameraShutter");
 const cameraPlayer = document.querySelector(".camera-player");
 const exploreMeter = document.querySelector("#exploreMeter");
@@ -24,17 +21,17 @@ const exploreRate = document.querySelector("#exploreRate");
 localStorage.removeItem("personal-theme");
 
 const memories = [
-  { src: "assets/memory-camera-01.webp", title: "南方日出", alt: "回忆照片：南方日出" },
-  { src: "assets/memory-camera-02.webp", title: "晴光路口", alt: "回忆照片：晴光路口" },
-  { src: "assets/memory-camera-03.webp", title: "雾里花树", alt: "回忆照片：雾里花树" },
-  { src: "assets/memory-camera-04.webp", title: "雨后街道", alt: "回忆照片：雨后街道" },
-  { src: "assets/memory-camera-05.webp", title: "院中绿影", alt: "回忆照片：院中绿影" },
-  { src: "assets/memory-camera-06.webp", title: "水面划行", alt: "回忆照片：水面划行" },
-  { src: "assets/memory-camera-07.webp", title: "绿叶果实", alt: "回忆照片：绿叶果实" },
-  { src: "assets/memory-camera-08.webp", title: "校园路口", alt: "回忆照片：校园路口" },
-  { src: "assets/memory-camera-09.webp", title: "雨水倒影", alt: "回忆照片：雨水倒影" },
-  { src: "assets/memory-camera-10.webp", title: "雨林台阶", alt: "回忆照片：雨林台阶" },
-  { src: "assets/memory-camera-11.webp", title: "水中树影", alt: "回忆照片：水中树影" },
+  { src: "assets/memory-camera-01.webp", alt: "回忆照片 01" },
+  { src: "assets/memory-camera-02.webp", alt: "回忆照片 02" },
+  { src: "assets/memory-camera-03.webp", alt: "回忆照片 03" },
+  { src: "assets/memory-camera-04.webp", alt: "回忆照片 04" },
+  { src: "assets/memory-camera-05.webp", alt: "回忆照片 05" },
+  { src: "assets/memory-camera-06.webp", alt: "回忆照片 06" },
+  { src: "assets/memory-camera-07.webp", alt: "回忆照片 07" },
+  { src: "assets/memory-camera-08.webp", alt: "回忆照片 08" },
+  { src: "assets/memory-camera-09.webp", alt: "回忆照片 09" },
+  { src: "assets/memory-camera-10.webp", alt: "回忆照片 10" },
+  { src: "assets/memory-camera-11.webp", alt: "回忆照片 11" },
 ];
 
 let memoryIndex = 0;
@@ -65,9 +62,6 @@ function setMemory(index) {
     reelImage.src = memory.src;
     reelImage.alt = memory.alt;
   }
-  if (reelTitle) reelTitle.textContent = memory.title;
-  if (reelIndex) reelIndex.textContent = String(memoryIndex + 1).padStart(2, "0");
-  if (reelTotal) reelTotal.textContent = String(memories.length).padStart(2, "0");
   reelDots?.querySelectorAll("button").forEach((dot, dotIndex) => {
     dot.classList.toggle("is-active", dotIndex === memoryIndex);
   });
@@ -157,7 +151,7 @@ cameraShutter?.addEventListener("click", takePhoto);
 memories.forEach((memory, index) => {
   const dot = document.createElement("button");
   dot.type = "button";
-  dot.setAttribute("aria-label", `查看${memory.title}`);
+  dot.setAttribute("aria-label", `查看第${String(index + 1).padStart(2, "0")}张回忆照片`);
   dot.addEventListener("click", () => {
     setMemory(index);
   });
