@@ -856,6 +856,47 @@ h3 {
   background: color-mix(in srgb, var(--lavender) 48%, var(--surface));
 }
 
+.zjy-gallery {
+  grid-auto-rows: 170px;
+}
+
+.zjy-gallery figure {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 4px 4px 0 var(--line);
+}
+
+.zjy-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.zjy-gallery figure:nth-child(2) img,
+.zjy-gallery figure:nth-child(4) img {
+  object-position: center 18%;
+}
+
+.zjy-gallery figcaption {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  max-width: calc(100% - 20px);
+  padding: 6px 10px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  font-size: 0.86rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
 .orbit-map {
   position: relative;
   min-height: 300px;
@@ -935,6 +976,12 @@ h3 {
 .contact-panel p {
   margin-top: 18px;
   line-height: 2.15;
+}
+
+.contact-panel h2 {
+  font-size: clamp(1.9rem, 3.4vw, 3.35rem);
+  line-height: 1.05;
+  white-space: nowrap;
 }
 
 .contact-actions {
@@ -1241,6 +1288,15 @@ h3 {
   .star-list,
   .coordinate-card {
     grid-template-columns: 1fr;
+  }
+
+  .zjy-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 164px;
+  }
+
+  .contact-panel h2 {
+    font-size: clamp(1.35rem, 7vw, 2.2rem);
   }
 
   .orbit-map {
