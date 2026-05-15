@@ -9,7 +9,7 @@
       content="尾号7728，韩坤燕的个人影像网页，记录旧照、音乐、云、好友关系和成长经历。"
     />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff9fcb'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-size='24' font-family='Arial' font-weight='900' fill='white'%3E28%3C/text%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="styles.css?v=portrait-marquee-20260514" />
+    <link rel="stylesheet" href="styles.css?v=explore-rate-20260515" />
   </head>
   <body>
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -72,10 +72,6 @@
             <figure aria-hidden="true"><img src="assets/portrait-10.webp" alt="" /></figure>
             <figure aria-hidden="true"><img src="assets/portrait-11.webp" alt="" /></figure>
           </div>
-          <div class="portrait-note">
-            <span>个人形象照片集</span>
-            <strong>从右到左，像回忆自己走过来</strong>
-          </div>
         </aside>
       </section>
 
@@ -127,10 +123,10 @@
         </div>
 
         <div class="explore-layout">
-          <article class="explore-meter">
-            <h3>今日探索仪表</h3>
-            <div class="meter-ring" aria-label="人间探索率 87%">
-              <span>87%</span>
+          <article class="explore-meter" id="exploreMeter" data-explore-value="87">
+            <h3>对她的探索率</h3>
+            <div class="meter-ring" id="exploreRing" aria-label="对她的探索率 87%">
+              <span id="exploreRate">87%</span>
             </div>
             <div class="meter-list">
               <div><span>云层收集</span><strong>高</strong></div>
@@ -140,25 +136,25 @@
           </article>
 
           <div class="cloud-wall" aria-label="大学拍过的不同云">
-            <button class="cloud-card tall" type="button" data-photo="assets/photo-green-sky.webp" data-title="蓝天绿叶">
-              <img src="assets/photo-green-sky.webp" alt="大学拍摄的蓝天绿叶" />
-              <span>蓝天绿叶</span>
+            <button class="cloud-card tall" type="button" data-photo="assets/photo-sunset-sea.webp" data-title="海面日落">
+              <img src="assets/photo-sunset-sea.webp" alt="海面日落照片" />
+              <span>海面日落</span>
             </button>
             <button class="cloud-card" type="button" data-photo="assets/photo-snow-mountain.webp" data-title="雪山云影">
               <img src="assets/photo-snow-mountain.webp" alt="雪山云影照片" />
               <span>雪山云影</span>
             </button>
-            <button class="cloud-card" type="button" data-photo="assets/photo-branches-sunset.webp" data-title="枝影落日">
-              <img src="assets/photo-branches-sunset.webp" alt="枝影落日照片" />
-              <span>枝影落日</span>
+            <button class="cloud-card" type="button" data-photo="assets/photo-green-sky.webp" data-title="蓝天绿叶">
+              <img src="assets/photo-green-sky.webp" alt="大学拍摄的蓝天绿叶" />
+              <span>蓝天绿叶</span>
             </button>
             <button class="cloud-card wide" type="button" data-photo="assets/photo-city-view.webp" data-title="城市远眺">
               <img src="assets/photo-city-view.webp" alt="城市远眺照片" />
               <span>城市远眺</span>
             </button>
-            <button class="cloud-card wide" type="button" data-photo="assets/photo-sunset-sea.webp" data-title="海面日落">
-              <img src="assets/photo-sunset-sea.webp" alt="海面日落照片" />
-              <span>海面日落</span>
+            <button class="cloud-card wide" type="button" data-photo="assets/photo-branches-sunset.webp" data-title="枝影落日">
+              <img src="assets/photo-branches-sunset.webp" alt="枝影落日照片" />
+              <span>枝影落日</span>
             </button>
           </div>
         </div>
@@ -260,6 +256,6 @@
       <strong></strong>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="script.js?v=portrait-marquee-20260514"></script>
+    <script src="script.js?v=explore-rate-20260515"></script>
   </body>
 </html>

@@ -620,7 +620,10 @@ h3 {
   border-radius: 50%;
   background:
     radial-gradient(circle, var(--surface) 0 54%, transparent 55%),
-    conic-gradient(var(--teal) 0 87%, color-mix(in srgb, var(--line) 12%, transparent) 87% 100%);
+    conic-gradient(
+      var(--teal) 0 var(--explore-value, 87%),
+      color-mix(in srgb, var(--line) 12%, transparent) var(--explore-value, 87%) 100%
+    );
   box-shadow: 8px 8px 0 var(--line);
 }
 

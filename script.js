@@ -14,6 +14,9 @@ const reelImage = document.querySelector("#reelImage");
 const reelTitle = document.querySelector("#reelTitle");
 const reelIndex = document.querySelector("#reelIndex");
 const reelDots = document.querySelector("#reelDots");
+const exploreMeter = document.querySelector("#exploreMeter");
+const exploreRing = document.querySelector("#exploreRing");
+const exploreRate = document.querySelector("#exploreRate");
 
 localStorage.removeItem("personal-theme");
 
@@ -27,6 +30,7 @@ const memories = [
 
 let memoryIndex = 0;
 let memoryTimer = null;
+let exploreValue = Number(exploreMeter?.dataset.exploreValue || 87);
 
 function showToast(message) {
   if (!toast) return;
@@ -74,6 +78,18 @@ function pauseMemories() {
   memoryTimer = null;
 }
 
+function setExploreValue(value) {
+  exploreValue = Math.min(100, Math.max(0, value));
+  const label = `${exploreValue}%`;
+  exploreRing?.style.setProperty("--explore-value", label);
+  if (exploreRate) exploreRate.textContent = label;
+  exploreRing?.setAttribute("aria-label", `对她的探索率 ${label}`);
+}
+
+function increaseExploreValue() {
+  setExploreValue(exploreValue + 3);
+}
+
 printButton?.addEventListener("click", () => window.print());
 
 copyEmail?.addEventListener("click", async () => {
@@ -111,6 +127,7 @@ setMemory(0);
 
 document.querySelectorAll("[data-photo]").forEach((tile) => {
   tile.addEventListener("click", () => {
+    if (tile.classList.contains("cloud-card")) increaseExploreValue();
     if (!lightbox || !lightboxImage || !lightboxTitle) return;
     lightboxImage.src = tile.dataset.photo;
     lightboxImage.alt = tile.dataset.title || "照片";
@@ -119,6 +136,7 @@ document.querySelectorAll("[data-photo]").forEach((tile) => {
     lightbox.setAttribute("aria-hidden", "false");
   });
 });
+setExploreValue(exploreValue);
 
 function closeLightbox() {
   if (!lightbox) return;
