@@ -503,6 +503,39 @@ h3 {
   padding: 56px 34px 34px;
 }
 
+.anime-pet-scene {
+  display: block;
+  min-height: 0;
+  padding: 0;
+}
+
+.anime-border-collie {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.feed-overlay {
+  position: absolute;
+  right: 6%;
+  bottom: 7%;
+  z-index: 4;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.feed-overlay .kibble-pile {
+  position: relative;
+  left: auto;
+  right: auto;
+  top: auto;
+  width: 96px;
+  height: 34px;
+  pointer-events: none;
+}
+
 .border-collie {
   position: relative;
   width: min(360px, 100%);
@@ -1741,6 +1774,18 @@ h3 {
     grid-template-columns: 1fr;
     min-height: 560px;
     padding: 72px 22px 24px;
+  }
+
+  .anime-pet-scene {
+    min-height: 0;
+    padding: 0;
+  }
+
+  .feed-overlay {
+    right: 5%;
+    bottom: 5%;
+    transform: scale(0.82);
+    transform-origin: right bottom;
   }
 
   .border-collie {
