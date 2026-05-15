@@ -82,9 +82,40 @@
           <p class="eyebrow">Cloud pet</p>
           <h2 id="cloudPetTitle">我的云宠物</h2>
         </div>
-        <figure class="cloud-pet-card">
-          <img src="assets/cloud-pet-dog.png" alt="一只小狗在云朵上安静睡觉，旁边放着小碗，怀里抱着小鸭子玩具，梦里有爱心和零食" />
-        </figure>
+        <div class="cloud-pet-card" aria-label="一只小边牧云宠物正在安静睡觉">
+          <div class="dream-bubble" aria-hidden="true">
+            <span>♡</span>
+            <span>骨</span>
+            <span>★</span>
+          </div>
+          <div class="sleep-mark" aria-hidden="true">Zzz</div>
+          <div class="pet-scene">
+            <div class="border-collie" aria-hidden="true">
+              <span class="dog-tail"></span>
+              <span class="dog-body"></span>
+              <span class="dog-chest"></span>
+              <span class="dog-head"></span>
+              <span class="dog-ear dog-ear-left"></span>
+              <span class="dog-ear dog-ear-right"></span>
+              <span class="dog-blaze"></span>
+              <span class="dog-eye dog-eye-left"></span>
+              <span class="dog-eye dog-eye-right"></span>
+              <span class="dog-nose"></span>
+              <span class="dog-paw dog-paw-left"></span>
+              <span class="dog-paw dog-paw-right"></span>
+              <span class="duck-toy"></span>
+            </div>
+            <div class="food-zone">
+              <div class="food-bag" aria-hidden="true">
+                <span>粮</span>
+              </div>
+              <div class="pet-bowl" aria-label="云宠物的小碗">
+                <div class="kibble-pile" id="kibblePile" aria-hidden="true"></div>
+              </div>
+              <button class="feed-button" id="feedPet" type="button">点击投喂</button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="memory-section section" id="memory" aria-labelledby="memoryTitle">
@@ -102,7 +133,7 @@
             <div class="track-copy">
               <p class="eyebrow">Favorite song</p>
               <h3>一首我喜欢的歌</h3>
-              <p>先把位置留给旋律。等你给我歌名或音频文件，这里会变成真正能播放的个人歌单。</p>
+              <p>老歌新听就像旧事重提，思绪瞬间涌上心头。</p>
             </div>
             <button class="button primary play-toggle" id="memoryPlay" type="button" aria-pressed="false">播放回忆</button>
             <div class="fake-wave" aria-hidden="true">

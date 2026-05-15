@@ -14,6 +14,8 @@ const reelImage = document.querySelector("#reelImage");
 const reelDots = document.querySelector("#reelDots");
 const cameraShutter = document.querySelector("#cameraShutter");
 const cameraPlayer = document.querySelector(".camera-player");
+const feedPet = document.querySelector("#feedPet");
+const kibblePile = document.querySelector("#kibblePile");
 const exploreMeter = document.querySelector("#exploreMeter");
 const exploreRing = document.querySelector("#exploreRing");
 const exploreRate = document.querySelector("#exploreRate");
@@ -37,6 +39,7 @@ const memories = [
 let memoryIndex = 0;
 let memoryTimer = null;
 let exploreValue = Number(exploreMeter?.dataset.exploreValue || 87);
+let kibbleCount = 5;
 
 function showToast(message) {
   if (!toast) return;
@@ -126,6 +129,26 @@ function increaseExploreValue() {
   setExploreValue(exploreValue + 3);
 }
 
+function renderKibble() {
+  if (!kibblePile) return;
+  kibblePile.replaceChildren();
+  const count = Math.min(kibbleCount, 18);
+  for (let index = 0; index < count; index += 1) {
+    const kibble = document.createElement("span");
+    const column = index % 9;
+    const row = Math.floor(index / 9);
+    kibble.style.left = `${8 + column * 9 + (row % 2) * 4}%`;
+    kibble.style.top = `${8 + row * 12 + (index % 3) * 2}px`;
+    kibble.style.transform = `rotate(${(index * 37) % 42 - 18}deg)`;
+    kibblePile.append(kibble);
+  }
+}
+
+function feedCloudPet() {
+  kibbleCount = Math.min(kibbleCount + 3, 18);
+  renderKibble();
+}
+
 printButton?.addEventListener("click", () => window.print());
 
 copyEmail?.addEventListener("click", async () => {
@@ -147,6 +170,8 @@ memoryPlay?.addEventListener("click", () => {
 });
 
 cameraShutter?.addEventListener("click", takePhoto);
+feedPet?.addEventListener("click", feedCloudPet);
+renderKibble();
 
 memories.forEach((memory, index) => {
   const dot = document.createElement("button");
