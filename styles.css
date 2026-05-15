@@ -530,33 +530,97 @@ h3 {
 
 .memory-reel {
   display: grid;
-  gap: 14px;
+  gap: 16px;
   padding: 18px;
   background:
-    linear-gradient(90deg, var(--line) 0 18px, transparent 18px calc(100% - 18px), var(--line) calc(100% - 18px)),
-    var(--surface);
+    linear-gradient(135deg, #282d31, #11161c 68%),
+    var(--line);
+  color: #fffdf8;
+}
+
+.camera-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.camera-brand,
+.camera-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 2px solid #fffdf8;
+  border-radius: var(--radius);
+  font-weight: 950;
+}
+
+.camera-status {
+  justify-self: end;
+  background: var(--coral);
+  color: #fffdf8;
+}
+
+.camera-lens {
+  justify-self: center;
+  width: 58px;
+  aspect-ratio: 1;
+  border: 3px solid #fffdf8;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #0f1419 0 28%, transparent 29%),
+    conic-gradient(from 30deg, var(--blue), var(--teal), var(--gold), var(--coral), var(--blue));
 }
 
 .reel-frame {
   position: relative;
-  min-height: 500px;
+  height: clamp(420px, 46vw, 620px);
   overflow: hidden;
   border: 3px solid var(--line);
   border-radius: var(--radius);
   background: var(--line);
+  box-shadow: inset 0 0 0 12px #0f1419;
 }
 
 .reel-frame img {
   width: 100%;
   height: 100%;
-  min-height: 500px;
   object-fit: cover;
+}
+
+.camera-viewfinder::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  z-index: 2;
+  border: 1px solid rgba(255, 253, 248, 0.58);
+  background:
+    linear-gradient(90deg, transparent calc(33.33% - 1px), rgba(255, 253, 248, 0.32) calc(33.33% - 1px) calc(33.33% + 1px), transparent calc(33.33% + 1px)),
+    linear-gradient(90deg, transparent calc(66.66% - 1px), rgba(255, 253, 248, 0.32) calc(66.66% - 1px) calc(66.66% + 1px), transparent calc(66.66% + 1px)),
+    linear-gradient(180deg, transparent calc(33.33% - 1px), rgba(255, 253, 248, 0.32) calc(33.33% - 1px) calc(33.33% + 1px), transparent calc(33.33% + 1px)),
+    linear-gradient(180deg, transparent calc(66.66% - 1px), rgba(255, 253, 248, 0.32) calc(66.66% - 1px) calc(66.66% + 1px), transparent calc(66.66% + 1px));
+  pointer-events: none;
+}
+
+.camera-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: #fffdf8;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.camera-player.is-shooting .camera-flash {
+  animation: shutter-flash 340ms ease-out;
 }
 
 .reel-caption {
   position: absolute;
   left: 18px;
   bottom: 18px;
+  z-index: 3;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -570,6 +634,55 @@ h3 {
 
 .reel-caption span {
   color: var(--coral);
+}
+
+.camera-controls {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 2px solid #fffdf8;
+  border-radius: var(--radius);
+  background: #161b20;
+}
+
+.shutter-button {
+  display: grid;
+  width: 74px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 3px solid #fffdf8;
+  border-radius: 50%;
+  background: var(--surface);
+  cursor: pointer;
+  box-shadow: 0 0 0 5px #2d343b;
+}
+
+.shutter-button span {
+  width: 42px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--coral);
+  box-shadow: inset 0 0 0 6px var(--gold);
+}
+
+.shutter-button:active {
+  transform: scale(0.94);
+}
+
+.shutter-hint,
+.film-counter {
+  margin: 0;
+  color: #fffdf8;
+  font-weight: 900;
+}
+
+.film-counter {
+  justify-self: end;
+  padding: 8px 10px;
+  border: 2px solid #fffdf8;
+  border-radius: var(--radius);
 }
 
 .reel-dots {
@@ -925,6 +1038,12 @@ h3 {
   to { transform: translateX(calc(-50%)); }
 }
 
+@keyframes shutter-flash {
+  0% { opacity: 0; }
+  14% { opacity: 0.94; }
+  100% { opacity: 0; }
+}
+
 @media (max-width: 1080px) {
   .site-header {
     grid-template-columns: auto auto;
@@ -1099,9 +1218,8 @@ h3 {
     width: min(220px, 66vw);
   }
 
-  .reel-frame,
-  .reel-frame img {
-    min-height: 360px;
+  .reel-frame {
+    height: clamp(340px, 72vw, 460px);
   }
 
   .cloud-wall {

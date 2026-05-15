@@ -14,6 +14,9 @@ const reelImage = document.querySelector("#reelImage");
 const reelTitle = document.querySelector("#reelTitle");
 const reelIndex = document.querySelector("#reelIndex");
 const reelDots = document.querySelector("#reelDots");
+const reelTotal = document.querySelector("#reelTotal");
+const cameraShutter = document.querySelector("#cameraShutter");
+const cameraPlayer = document.querySelector(".camera-player");
 const exploreMeter = document.querySelector("#exploreMeter");
 const exploreRing = document.querySelector("#exploreRing");
 const exploreRate = document.querySelector("#exploreRate");
@@ -21,11 +24,17 @@ const exploreRate = document.querySelector("#exploreRate");
 localStorage.removeItem("personal-theme");
 
 const memories = [
-  { src: "assets/photo-sunset-sea.webp", title: "海面日落", alt: "回忆照片：海面日落" },
-  { src: "assets/photo-branches-sunset.webp", title: "枝影落日", alt: "回忆照片：枝影落日" },
-  { src: "assets/photo-snow-mountain.webp", title: "雪山云影", alt: "回忆照片：雪山云影" },
-  { src: "assets/photo-green-sky.webp", title: "蓝天绿叶", alt: "回忆照片：蓝天绿叶" },
-  { src: "assets/photo-city-view.webp", title: "城市远眺", alt: "回忆照片：城市远眺" },
+  { src: "assets/memory-camera-01.webp", title: "南方日出", alt: "回忆照片：南方日出" },
+  { src: "assets/memory-camera-02.webp", title: "晴光路口", alt: "回忆照片：晴光路口" },
+  { src: "assets/memory-camera-03.webp", title: "雾里花树", alt: "回忆照片：雾里花树" },
+  { src: "assets/memory-camera-04.webp", title: "雨后街道", alt: "回忆照片：雨后街道" },
+  { src: "assets/memory-camera-05.webp", title: "院中绿影", alt: "回忆照片：院中绿影" },
+  { src: "assets/memory-camera-06.webp", title: "水面划行", alt: "回忆照片：水面划行" },
+  { src: "assets/memory-camera-07.webp", title: "绿叶果实", alt: "回忆照片：绿叶果实" },
+  { src: "assets/memory-camera-08.webp", title: "校园路口", alt: "回忆照片：校园路口" },
+  { src: "assets/memory-camera-09.webp", title: "雨水倒影", alt: "回忆照片：雨水倒影" },
+  { src: "assets/memory-camera-10.webp", title: "雨林台阶", alt: "回忆照片：雨林台阶" },
+  { src: "assets/memory-camera-11.webp", title: "水中树影", alt: "回忆照片：水中树影" },
 ];
 
 let memoryIndex = 0;
@@ -58,16 +67,49 @@ function setMemory(index) {
   }
   if (reelTitle) reelTitle.textContent = memory.title;
   if (reelIndex) reelIndex.textContent = String(memoryIndex + 1).padStart(2, "0");
+  if (reelTotal) reelTotal.textContent = String(memories.length).padStart(2, "0");
   reelDots?.querySelectorAll("button").forEach((dot, dotIndex) => {
     dot.classList.toggle("is-active", dotIndex === memoryIndex);
   });
+}
+
+function playShutterSound() {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  const context = new AudioContext();
+  const now = context.currentTime;
+  const master = context.createGain();
+  master.connect(context.destination);
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(0.28, now + 0.008);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+
+  [760, 320].forEach((frequency, offset) => {
+    const oscillator = context.createOscillator();
+    oscillator.type = "square";
+    oscillator.frequency.setValueAtTime(frequency, now + offset * 0.045);
+    oscillator.connect(master);
+    oscillator.start(now + offset * 0.045);
+    oscillator.stop(now + offset * 0.045 + 0.055);
+  });
+
+  window.setTimeout(() => context.close(), 260);
+}
+
+function takePhoto({ sound = true } = {}) {
+  cameraPlayer?.classList.remove("is-shooting");
+  void cameraPlayer?.offsetWidth;
+  cameraPlayer?.classList.add("is-shooting");
+  if (sound) playShutterSound();
+  window.setTimeout(() => setMemory(memoryIndex + 1), 120);
 }
 
 function playMemories() {
   document.body.classList.add("is-playing-memory");
   memoryPlay?.setAttribute("aria-pressed", "true");
   if (memoryPlay) memoryPlay.textContent = "暂停回忆";
-  memoryTimer = window.setInterval(() => setMemory(memoryIndex + 1), 2800);
+  takePhoto({ sound: false });
+  memoryTimer = window.setInterval(() => takePhoto({ sound: false }), 2800);
 }
 
 function pauseMemories() {
@@ -110,16 +152,14 @@ memoryPlay?.addEventListener("click", () => {
   }
 });
 
+cameraShutter?.addEventListener("click", takePhoto);
+
 memories.forEach((memory, index) => {
   const dot = document.createElement("button");
   dot.type = "button";
   dot.setAttribute("aria-label", `查看${memory.title}`);
   dot.addEventListener("click", () => {
     setMemory(index);
-    if (memoryTimer) {
-      pauseMemories();
-      playMemories();
-    }
   });
   reelDots?.append(dot);
 });
