@@ -819,6 +819,11 @@ h3 {
     var(--surface);
 }
 
+.contact-panel p {
+  margin-top: 18px;
+  line-height: 2.15;
+}
+
 .contact-actions {
   display: flex;
   flex-wrap: wrap;

@@ -83,7 +83,7 @@ function setExploreValue(value) {
   const label = `${exploreValue}%`;
   exploreRing?.style.setProperty("--explore-value", label);
   if (exploreRate) exploreRate.textContent = label;
-  exploreRing?.setAttribute("aria-label", `对她的探索率 ${label}`);
+  exploreRing?.setAttribute("aria-label", `今日探索仪表 ${label}`);
 }
 
 function increaseExploreValue() {
